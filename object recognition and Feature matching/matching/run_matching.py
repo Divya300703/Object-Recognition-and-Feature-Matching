@@ -57,7 +57,7 @@ def find_objects(base, objects):
     result = base["image"].copy()
     found_objects = []
     for obj in objects:
-        if find_object(base, obj, result) == True:
+        if find_object(base, obj, result):
             found_objects.append(obj["name"])
 
     cv2.imshow('Final result for {} (objects found: {})'.format(base["name"], ", ".join(found_objects)), result)
@@ -65,6 +65,12 @@ def find_objects(base, objects):
         cv2.destroyAllWindows()
 
 if __name__ == "__main__":
+    # Ensure the user provides at least one base image and one object image
+  if __name__ == "__main__":
+    print(sys.argv)  # Add this line to debug
+    if len(sys.argv) < 3:
+        print("Usage: python script.py <base_image_path> <object_image_path1> <object_image_path2> ...")
+        sys.exit(1)
     # Get the base image and object images from the command-line arguments
     base_image_path = sys.argv[1]
     object_image_paths = sys.argv[2:]
